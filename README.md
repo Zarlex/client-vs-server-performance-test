@@ -9,6 +9,4 @@ client-vs-server-performance-test
    "mongod"
 6. Testplattform starten
    "node tesplattform"
-7. Browser öffnen (es wird empfohlen die aktuellste Version von Google Chrome zu verwenden)
-   Lokale Datenbanken funktionieren auf anderen Browsern teilweise nicht
-8. URL localhost:3001 aufrufen
+7. URL localhost:3001 aufrufen
