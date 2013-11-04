@@ -1,0 +1,14 @@
+<h2>Show {{tweets.length}} tweets </h2>
+
+<div ng-if="loading">
+  <img src="/img/ajax-loader.gif">
+</div>
+
+<ul class="tweets">
+
+  <div tp-tweet-results
+       tweets="tweets"
+       render-done="renderDone()"
+  ></div>
+
+</ul>

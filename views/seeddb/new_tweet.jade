@@ -1,0 +1,18 @@
+extend ../layout
+
+block content
+    form.form-horizontal(method="POST",action="/seeddb/tweets")
+        div.control-group
+            label.control-label(for="search_term") Search term
+            div.controls
+                input(name="query", id="search_term", required)
+
+        div.control-group
+            label.control-label(for="fetch_amount") Amount
+            div.controls
+                input(type="number", id="fetch_amount", name="amount", value="100", required)
+
+        div.control-group
+            div.controls
+                input.btn.btn-success(type="submit")
+

@@ -1,0 +1,21 @@
+extend ../layout
+
+block content
+    h2 Testergebnisse
+
+    ul.tests
+        -tests.forEach(function(test){
+        li.test
+            - var date=new Date(test.date);
+            h3 "#{test.name}" von #{test.start} - #{test.end} Interval: #{test.interval}
+            | #{date.getDate()}.#{date.getMonth()}.#{date.getFullYear()} | &nbsp;
+            a.btn(href="/tests/download/#{test._id}")
+                i.icon-download
+                |Download
+            | &nbsp;
+            a.btn(href="/tests/#{test._id}")
+                i.icon-eye-open(style="margin-right:10px")
+                |anzeigen
+            form(action="/tests/remove/#{test._id}",method="POST", style="display:inline-block")
+                input.btn.btn-danger(type="submit", value="löschen")
+        -})

@@ -1,0 +1,235 @@
+body{
+    font-family: "Myriad Pro",Arial,sans-serif;
+    margin: 0;
+
+    background-image: linear-gradient(left bottom, rgb(244,246,234) 25%, rgb(242,242,242) 75%);
+    background-image: -o-linear-gradient(left bottom, rgb(244,246,234) 25%, rgb(242,242,242) 75%);
+    background-image: -moz-linear-gradient(left bottom, rgb(244,246,234) 25%, rgb(242,242,242) 75%);
+    background-image: -webkit-linear-gradient(left bottom, rgb(244,246,234) 25%, rgb(242,242,242) 75%);
+    background-image: -ms-linear-gradient(left bottom, rgb(244,246,234) 25%, rgb(242,242,242) 75%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        right top,
+        color-stop(0.25, rgb(244,246,234)),
+        color-stop(0.75, rgb(242,242,242))
+    );
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+* html .clearfix {
+    zoom: 1;
+}
+/* IE6 */
+*:first-child+html .clearfix {
+    zoom: 1;
+}
+
+.center-both{
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 50%;
+}
+
+div.thesis{
+    float:left;
+    margin:15px;
+}
+
+div.logo{
+    padding: 10px 0;
+    text-align: right;
+    margin-right: 15px;
+}
+
+div.logo img{
+    width:100px;
+}
+
+header{
+    height:60px;
+}
+
+header .navbar-inner{
+  padding: 0 20px !important;
+}
+
+.container{
+    width:910px;
+    padding: 20px 15px;
+    margin: 10px auto 0;
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #bbb;
+}
+
+.test-progress{
+    margin-top: 4px;
+    margin-left: -43px;
+    width: 553px;
+    display:none;
+}
+
+.btn.pause-test,
+.btn.continue-test{
+    padding: 0px 5px;
+    margin: 3px;
+}
+
+.success-test{
+    margin-left: 8px;
+    margin-top: 3px;
+}
+
+div.result-stats{
+    top:40px;
+    background: rgba(255,255,255,0.8);
+    padding:5px;
+    border-radius: 3px;
+    z-index:999;
+}
+
+div.tweet-holder{
+    float:right;
+}
+
+ul.tweets{
+    list-style:none;
+    padding:0;
+    margin:0 0 20px 0;
+}
+
+ul.tweets .tweet a{
+    color:#252519;
+    text-decoration: none;
+}
+
+ul.tweets .tweet h3{
+    font-weight: normal;
+    font-size: 16px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    width:450px;
+}
+ul.tweets .tweet h3 .user-name{
+    position: relative;
+}
+
+ul.tweets .tweet h3 .user-name.verified:after{
+    content: "\2713";
+    background: rgb(68, 158, 255);
+    height: 15px;
+    width: 15px;
+    text-align: center;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    line-height: 19px;
+    position: relative;
+    display: inline-block;
+    margin-right: 5px;
+    top: -2px;
+}
+
+ul.tweets .tweet h3 .user-name.verified:before{
+    content: "Verified User";
+    position: absolute;
+    right: -25px;
+    background: rgba(0,0,0,0.5);
+    width: 67px;
+    padding: 2px 4px;
+    font-size: 12px;
+    color: white;
+    z-index: 9;
+    top: -22px;
+    border-radius: 3px;
+    display: none;
+}
+
+ul.tweets .tweet h3 .user-name.verified:hover:before{
+   display: block;
+}
+
+ul.tweets li .user,
+ul.tweets li .text{
+    float:left;
+}
+
+ul.tweets li .user{
+    text-align: center;
+    width:120px;
+}
+
+ul.tweets li .user img{
+    width:50px;
+    height:50px;
+    border-radius: 50%;
+}
+
+ul.tweets li .user .user-infos{
+    display: block;
+    color: grey;
+    font-size: 10px;
+}
+
+ul.tweets li .text{
+    padding: 10px;
+    width: 300px;
+    background: #eee;
+    border-radius: 3px;
+    position: relative;
+    min-height:60px;
+}
+
+ul.tweets li .text:before{
+    content:"";
+    position: absolute;
+    left: -7px;
+    top:10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right:10px solid #eee;
+}
+
+ul.errors li{
+    color:red;
+}
+
+ul.tests{
+    margin:0;
+    list-style: none;
+}
+
+ul.tests li{
+    border-bottom: 1px solid #ccc;
+}
+
+ul.tests a,
+ul.tests i{
+    margin-right:10px;
+}
+
+footer{
+    text-align: center;
+    margin-top:20px;
+    color:#ccc;
+}

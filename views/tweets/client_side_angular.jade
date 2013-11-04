@@ -1,0 +1,91 @@
+extend ../tweet_layout
+
+block additional-params
+    div.control-group.span10
+        label.control-label Render HTML with
+        div.controls
+            select(name="method",style="width:97%")
+                option(value="server") Serverseitig - HTML Erstellung mit JADE
+                option(value="js",selected=(params.method==="js"?"selected":undefined)) Clientseitig - HTML Erstellung über Stringkonkatenierung
+                option(value="ng",selected=(params.method==="ng"?"selected":undefined)) Clientseitig - Angular JS
+                option(value="underscore", selected=(params.method==="underscore"?"selected":undefined)) Clientseitig - Templating mit UnderscoreJS
+
+block stats
+    p
+    | Dom Ladezeit Time&nbsp;
+    span#domContentLoaded
+        img(src="/img/ajax-loader.gif")
+    br
+    | Seiten Ladezeit Time &nbsp;
+    span#pageLoaded
+        img(src="/img/ajax-loader.gif")
+    br
+    | Renderzeit auf dem Server &nbsp;
+    span#templateServerRendered
+        img(src="/img/ajax-loader.gif")
+    br
+    | Renderzeit auf dem Client &nbsp;
+    span#templateClientRendered
+        img(src="/img/ajax-loader.gif")
+    br
+    | Json Generierung &nbsp;
+    span#jsonRendered
+        img(src="/img/ajax-loader.gif")
+
+block tweetcontent
+    div(data-ng-app="Testplatform")
+        div(ng-view)
+
+        script(src="/js/angularjs/vendor/angular.min.js")
+        script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js")
+
+        script(src="/js/angularjs/app/app.js")
+        script(src="/js/angularjs/app/router.js")
+
+        script(src="/js/angularjs/app/modules/common/common.js")
+        script(src="/js/angularjs/app/modules/common/service/loading_service.js")
+
+        script(src="/js/angularjs/app/modules/twitter/twitter.js")
+        script(src="/js/angularjs/app/modules/twitter/service/twitter.js")
+        script(src="/js/angularjs/app/modules/twitter/controller/twitter.js")
+        script(src="/js/angularjs/app/modules/twitter/directive/twitter.js")
+
+block scripts
+    script.
+        var maxAmount=#{maxAmount},showProfImg=#{showProfImg}
+    script.
+        var testSaver=new Test(#{saveResults},5,"#{host}/tweets/render#{encodeURIComponent(query)}",#{params.limit || 0},#{params.interval || 1},#{parseInt(params.max) || parseInt(params.limit) || 0},"#{params.testid||false}","Client Side with Angular JS");
+
+        $(document).on("ready",function(){
+
+            window.addEventListener("load",function(){
+               var end=+new Date()-start;
+                console.log(end,"end loading");
+                console.timeEnd("load");
+                document.getElementById("pageLoaded").innerHTML=end+"ms";
+            })
+            window.addEventListener("DOMContentLoaded",function(){
+               var end=+new Date()-start;
+                console.log(end,"end Dom content loaded");
+                console.timeEnd("DOMContentLoaded");
+                testSaver.addResult({loadDom:end});
+                document.getElementById("domContentLoaded").innerHTML=end+"ms";
+            })
+
+            var socket = io.connect('http://localhost:3001');
+            socket.on('htmlTemplateRenderingTime', function (data) {
+                console.log("HTML",data.time);
+                testSaver.addResult({htmlRenderedOnServer:data.time});
+                document.getElementById("templateServerRendered").innerHTML=data.time
+            });
+            socket.on('jsonRenderingTime', function (data) {
+                console.log("JSON",data.time);
+                testSaver.addResult({jsonRenderedOnServer:data.time});
+                document.getElementById("jsonRendered").innerHTML=data.time
+            });
+
+            socket.on('dbProcessingTime', function(data) {
+                console.log("DB",data.time);
+                testSaver.addResult({dbProcessingTime:data.time});
+            });
+        });

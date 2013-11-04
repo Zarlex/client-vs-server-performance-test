@@ -1,0 +1,33 @@
+extend ../layout
+
+block content
+    h2 Einführung
+
+    p.
+        Diese Tesplattform dient dazu Performance Tests durchzuführen. Getetestet werden kann
+    ul
+        li.
+            Serverseitiges Rendern im Vergleich zu Clientseitigen Rendern. <br> Auf dem Client kann das HTML über Stringkonkatenierung, jQuery oder der Underscore Templatingenginge erstellt werden.
+        li.
+            Die Lokalen Datenbanken Localstorage, Web SQL, IndexedDB
+        li.
+            Der in der Thesis beschriebene Algorithmus für Delta Updates mit Timestamps
+
+    h3 Step 1. Lokale Datenbank befüllen
+    p
+    |Um dies Testst durchzuführen wird eine Lokale Datenbank mit Datensätzen befüllt. <br>
+    |Der Vorgang wird mithilfe der Twitter API erleichert. Über den Menüpunkt SeddDB müssen zuächst die Twitter Credentials eingegeben werden. <br>
+    |Diese erhält man beim erstellen einer Twitter Applikation auf &nbsp;
+    a(href="https://dev.twitter.com/apps") Twitter Developer
+    br
+    |Anschließend werden, nachdem ein Suchbegriff eingegeben wurde, beliebig viele Tweets von Twitter bezogen und lokal abgespeichert.
+
+    h3 Step 2. Test Starten
+    p
+    | Über den Menüpunkt Testund den jewiligen Unterpunkten könenn die Tests gestartet werden. Dabei werden in einem angegeben Interval Datensätze aus der Datenbank bezogen und gerendert (Rendering) bzw. in die lokale Datenbank geschrieben und ausgelesen (Lokale Datenbanken).
+    br
+    | Während dieses Vorgangs wird die Zeit gemessen und in einer Datenbank abgespeichert.
+
+    h3 Step 3. Testergebnisse downloaden
+    p
+    | Die gespeicherten Testergebniss könenn als CSV exportiert werden und in einem beliebigen Kalkulationsprogramm z.B. Excel geöffnet werden. <br>

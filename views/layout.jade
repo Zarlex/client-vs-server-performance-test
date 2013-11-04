@@ -1,0 +1,45 @@
+!!!5
+-if(params && params.cachemanifest==="true") {
+html(manifest="http://localhost:3001/manifest")
+-} else {
+html
+-}
+    head
+        title #{title}
+        include ../css/bootstrap.min.css
+        include ../css/style.css
+        meta(charset="utf-8")
+        script.
+           var start=+new Date();
+           console.time("load");
+           console.time("DOMContentLoaded");
+        script(src="/js/jquery.1.10.2.js")
+        script(src="/socket.io/socket.io.js")
+    body
+        header
+            div.navbar.navbar-fixed-top
+                div.navbar-inner
+                    a.brand(href="/")
+                        |Renderperformance Test
+                    ul.nav
+                        li(class=(path.length===1 || path[path.length]=="/"?"active":""))
+                            a(href="/")
+                                |Introduction
+                        li(class=(path.match("/seeddb")?"active":""))
+                            a(href="/seeddb")
+                                |Seed Database
+                        li(class=(path.match("/tweets")?"active":""))
+                            a(href="/tweets/render")
+                                |Run Test
+                        li(class=(path.match("/tests")?"active":""))
+                            a(href="/tests")
+                                |Test results
+
+        .container
+            .main-content
+                block content-head
+                block content
+        footer
+            p Created with NodeJS, Express, Jade ~~ (C) Zarges 2013
+        script(src="/js/bootstrap.js")
+        block scripts

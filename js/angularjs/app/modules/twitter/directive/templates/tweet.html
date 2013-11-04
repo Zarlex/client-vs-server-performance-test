@@ -1,0 +1,17 @@
+<a href="http://twitter.com/{{tweet.user.nic_name}}" class="clearfix">
+  <h3>
+    <span class="user-name ng-class: {verified: tweet.user.verifies}">{{tweet.user.name}}</span>
+    {{tweet.user.verifies}}
+    am {{date.getDay()}}.{{date.getFullMonth()}} {{date.getFullYear()}}
+    um {{date.getHours()}}:{{date.getMinutes()}} Uhr
+  </h3>
+
+  <div class="user">
+    <img ng-src="{{tweet.user.profile_image}}">
+    <span class="user-infos">
+      Kommt aus {{tweet.user.location}}<br>
+      {{tweet.user.followers}} follower
+    </span>
+  </div>
+  <div class="text">{{tweet.text}}</div>
+</a>

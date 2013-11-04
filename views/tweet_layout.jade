@@ -1,0 +1,78 @@
+extend layout
+
+block content-head
+    script(src="/js/saveTestResult.js")
+
+    - var queryParams={};
+    - for(var attr in params){ queryParams[attr]=params[attr]}
+    - queryParams.limit=parseInt(params.limit)+(parseInt(params.interval)||10);
+    - queryParams.step=parseInt(params.step)+1;
+    - serialize = function(obj) {
+    -   var str = [];
+    -   for(var p in obj){
+    -       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    -   }
+    -   return str.join("&");
+    - }
+    - var query="?"+serialize(queryParams);
+    - var saveResults=params.saveresults?params.saveresults=="true":false;
+
+    form.form-horizontal(method="GET", action="/tweets/#{params.action}")
+
+        div.row.span12
+            div.span3
+                div.control-group
+                    label.control-label(for="maxAmount") Min Results
+                    div.controls
+                        input.input-small(type="number",name="limit", id="maxAmount", value=(params.limit || 5))
+
+            div.span3
+                div.control-group
+                    label.control-label(for="maxAmount") Max Results
+                    div.controls
+                        input.input-small(type="number",name="max", id="maxAmount", value=(params.max || params.limit || 6))
+
+            div.span3
+                div.control-group
+                    label.control-label(for="interval") Interval
+                    div.controls
+                        input.input-small(type="number",name="interval", id="interval", value=(params.interval || 10))
+
+        div.row.span12
+            block additional-params
+
+        div.row.span12
+            div.control-group.span9
+                label.checkbox(for="showImages")
+                    input(type="checkbox",name="img", id="showImages", value="false", checked=((params.img=="false")?"checked":undefined) )
+                    | Keine Profilbilder von Twitter laden
+                label.checkbox(for="saveResults")
+                    input(type="checkbox",name="saveresults", id="saveResults", value="true", checked=((params.saveresults=="true")?"checked":undefined) )
+                    | Testergebnisse speichern
+                label.checkbox(for="cachemanifest")
+                    input(type="checkbox",name="cachemanifest", id="cachemanifest", value="true", checked=((params.cachemanifest=="true")?"checked":undefined) )
+                    | Cache-manifest aktivieren
+
+        div.row.span12
+            div.span3
+                input.btn.btn-success(type="submit",value="Test starten")
+            div.test-progress.progress.progress-striped.span6
+                div.bar(style="width: 0%;")
+            div.btn.pause-test
+                i.icon-pause
+            div.btn.continue-test
+                i.icon-play
+            div.success-test.icon-ok
+
+    hr.row.span11
+
+    div.row.span12
+        div.span4.result-stats(data-spy="affix", data-offset-top="353")
+            h3 Statistiken
+            block stats
+
+        div.span7.tweet-holder
+            block tweetcontent
+        script.
+            Date.prototype.fullMonths=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+            Date.prototype.getFullMonth=function(){return this.fullMonths[this.getMonth()]}
