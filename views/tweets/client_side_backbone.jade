@@ -2,7 +2,7 @@ extend ../tweet_layout
 
 block additional-params
     div.control-group.span10
-        label.control-label Render HTML with
+        label.control-label Zu testende Datenbank
         div.controls
             select(name="method",style="width:97%")
                 option(value="server") Serverseitig - HTML Erstellung mit JADE
@@ -34,24 +34,33 @@ block stats
         img(src="/img/ajax-loader.gif")
 
 block tweetcontent
-    h2
-        |Show&nbsp;
-        span.tweet-amount
-        |&nbsp;tweets
-    ul.tweets
+    div#tweetBB
         img(src="/img/ajax-loader.gif")
 
     a(href="tweets/new") Insert new tweets into Database
 
 block scripts
+
+    script(src="/js/backbonejs/vendor/jquery-1102-min.js")
+    script(src="/js/backbonejs/vendor/underscore-152-min.js")
+    script(src="/js/backbonejs/vendor/backbone-110-min.js")
+    script(src="/js/backbonejs/vendor/render-template.js")
+    script(src="/js/backbonejs/app/tweets.js")
+
     script.
+        Date.prototype.fullMonths=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+        Date.prototype.getFullMonth=function(){return this.fullMonths[this.getMonth()]}
         var maxAmount=#{maxAmount},showProfImg=#{showProfImg}
-    script(src="/js/app.js")
+
     script.
-        var testSaver=new Test(#{saveResults},7,"#{host}/tweets/render#{encodeURIComponent(query)}",#{params.limit || 0},#{params.interval || 1},#{parseInt(params.max) || parseInt(params.limit) || 0},"#{params.testid||false}","Client Side with string concatenation");
+        var testSaver=new Test(#{saveResults},5,"#{host}/tweets/render#{encodeURIComponent(query)}",#{params.limit || 0},#{params.interval || 1},#{parseInt(params.max) || parseInt(params.limit) || 0},"#{params.testid||false}","Client Side Backbone");
 
         $(document).on("ready",function(){
-            var tweet=new Tweet($("ul.tweets"));
+
+            var TweetApp = new TweetAppView({maxAmount:maxAmount});
+                TweetApp.render();
+
+            /*var tweet=new Tweet($("ul.tweets"));
             var s23=+new Date();
             tweet.fetch({
                 limit:maxAmount,
@@ -59,7 +68,7 @@ block scripts
             },function(){
                 tweet.addAll(arguments[0],arguments[1]);
                 testSaver.addResult({deltaTotalTime:(+new Date)-s23});
-            })
+            })*/
 
             window.addEventListener("load",function(){
                var end=+new Date()-start;

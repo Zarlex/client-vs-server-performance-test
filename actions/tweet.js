@@ -36,6 +36,10 @@ exports.show = function (request, response) {
       response.render('tweets/client_side_angular',
         { title: 'Tweets - Angular JS', maxAmount: limit, showProfImg: showProfImg, params: params, host: request.headers.host,path:request.route.path}
       )
+    } else if (params.method === "bb") {
+      response.render('tweets/client_side_backbone',
+          { title: 'Tweets - Backbone JS', maxAmount: limit, showProfImg: showProfImg, params: params, host: request.headers.host,path:request.route.path}
+      )
     } else {
       var title1 = "Query Database", t_db = process.hrtime();
       finder.findTweets(params, limit, function (error, tweets) {
@@ -54,7 +58,6 @@ exports.show = function (request, response) {
       });
       return;
     }
-
 
     var t2 = process.hrtime(t_r);
     response.end();

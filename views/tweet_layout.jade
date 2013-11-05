@@ -47,7 +47,7 @@ block content-head
                     input(type="checkbox",name="img", id="showImages", value="false", checked=((params.img=="false")?"checked":undefined) )
                     | Keine Profilbilder von Twitter laden
                 label.checkbox(for="saveResults")
-                    input(type="checkbox",name="saveresults", id="saveResults", value="true", checked=((params.saveresults=="true")?"checked":undefined) )
+                    input(type="checkbox",name="saveresults", id="saveResults", value="true", checked="checked" )
                     | Testergebnisse speichern
                 label.checkbox(for="cachemanifest")
                     input(type="checkbox",name="cachemanifest", id="cachemanifest", value="true", checked=((params.cachemanifest=="true")?"checked":undefined) )

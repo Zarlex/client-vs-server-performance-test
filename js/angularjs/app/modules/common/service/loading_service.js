@@ -12,7 +12,6 @@ angular.module('Testplatform.Common').factory('Loading', function ($rootScope) {
     _registerdAmount++;
     test.push(1);
     $rootScope.pendingRequests = true;
-    console.log("LOADING??[Service::Register]",$rootScope.pendingRequests);
   };
 
   var unregister = function () {
@@ -22,7 +21,6 @@ angular.module('Testplatform.Common').factory('Loading', function ($rootScope) {
 
     if (_registeredLoader === 0) {
       $rootScope.pendingRequests = false;
-      console.log("LOADING??[Service::Unregister]",$rootScope.pendingRequests);
       _registerdAmount = 0;
     }
   };

@@ -7,7 +7,8 @@ block additional-params
             select(name="method",style="width:97%")
                 option(value="server") Serverseitig - HTML Erstellung mit JADE
                 option(value="js",selected=(params.method==="js"?"selected":undefined)) Clientseitig - HTML Erstellung über Stringkonkatenierung
-                option(value="ng",selected=(params.method==="ng"?"selected":undefined)) Clientseitig - Angular JS
+                option(value="bb",selected=(params.method==="bb"?"selected":undefined)) Clientseitig - BackboneJS
+                option(value="ng",selected=(params.method==="ng"?"selected":undefined)) Clientseitig - AngularJS
                 option(value="underscore", selected=(params.method==="underscore"?"selected":undefined)) Clientseitig - Templating mit UnderscoreJS
 
 block stats

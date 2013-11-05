@@ -1,0 +1,16 @@
+<a href="http://twitter.com/<%=model.user.id%>" class="clearfix">
+  <h3>
+    <span class="user-name <%=(model.user.verified? 'verified':'')%>"><%=model.user.name%></span>
+    <% var date=new Date(model.tweet.created_at) %>
+    am  <%=date.getDay()%>.<%=date.getFullMonth()%> <%=date.getFullYear()%>
+    um  <%=date.getHours()%>:<%=date.getMinutes()%> Uhr
+  </h3>
+  <div class="user">
+    <img src="<%=model.user.img%>">
+                    <span class="user-infos">
+                        Kommt aus <%=model.user.location%><br>
+                        <%=model.user.followers%> follower
+                    </span>
+  </div>
+  <div class="text"><%=model.tweet.text%></div>
+</a>

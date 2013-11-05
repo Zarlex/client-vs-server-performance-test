@@ -76,7 +76,7 @@ Test.prototype.getTestId = function () {
 
 Test.prototype.addResult = function (result) {
     this.resultParams.push(result);
-    console.log(this.resultParams.length, this.testAttrAmount, "JO", this.resultParams)
+
     if (this.resultParams.length === this.testAttrAmount) {
 
         this.save();
